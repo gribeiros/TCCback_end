@@ -1,10 +1,9 @@
 import express from 'express'
-import { waterLevel, serviceSocket } from './controllers/ConsultingController.js';
+import { updateStatus } from './controllers/ConsultingController.js';
 
 const router = express.Router()
 
 router
-    .get('/water', waterLevel)
-    .post('/waterSokect', serviceSocket)
+    .get('/update-status', updateStatus)
 
 export default router
