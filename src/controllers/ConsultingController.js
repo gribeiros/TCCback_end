@@ -1,22 +1,22 @@
-import axios from 'axios';
+import axios from "axios";
+import log4js from "../util/Logger.js";
+
+const logger = log4js.getLogger("ConsultingController");
 
 export async function updateStatus(req, res) {
-    try {
-        const url = 'http://192.168.100.123/S'
+  try {
+    const url = "http://192.168.100.123/S";
 
-        console.log('\n--------------------------------------------------');
-        console.log('Recebido requisição:\n')
-        console.log(new Date().toISOString() + 'Url: ' + url)
-        console.log('----------------------end-------------------------\n');
-        const response = await axios.get(url);
-        const data = response.data;
-        if (!data)
-            return res.status(500).send({ statusArduino: 'off' });
+    logger.debug("Consultando a Api " + url);
+    //const response = await axios.get(url);
+    //const data = response.data;
 
-        return res.status(200).send({ status: data });
+    const data = { waterLevel: 450, flowLevel: 5.89 };
+    if (!data) return res.status(500).send({ statusArduino: "off" });
 
-    } catch (e) {
-        console.error(e);
-        res.status(500).send(e);
-    }
+    return res.status(200).send({ status: data });
+  } catch (e) {
+    logger.error(e);
+    res.status(500).send(e);
+  }
 }
