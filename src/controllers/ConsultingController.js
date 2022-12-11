@@ -8,10 +8,9 @@ export async function updateStatus(req, res) {
     const url = "http://192.168.100.123/S";
 
     logger.debug("Consultando a Api " + url);
-    //const response = await axios.get(url);
-    //const data = response.data;
+    const response = await axios.get(url);
+    const data = response.data;
 
-    const data = { waterLevel: 450, flowLevel: 5.89 };
     if (!data) return res.status(500).send({ statusArduino: "off" });
 
     return res.status(200).send({ status: data });
